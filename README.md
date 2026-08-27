@@ -1,1 +1,1 @@
-# shop
+just ai slop
