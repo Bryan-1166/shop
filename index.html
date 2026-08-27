@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tiny Shop Manager</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="game">
+
+    <header>
+
+        <div>
+            <h1>🏪 Tiny Shop Manager</h1>
+            <p>Manage your shop, restock items and serve customers.</p>
+        </div>
+
+        <div class="top-stats">
+
+            <div class="stat">
+                <span>💰 MONEY</span>
+                <strong id="money">Rp0</strong>
+            </div>
+
+            <div class="stat">
+                <span>⭐ SCORE</span>
+                <strong id="score">0</strong>
+            </div>
+
+            <div class="stat">
+                <span>🏆 HIGH SCORE</span>
+                <strong id="highScore">0</strong>
+            </div>
+
+            <button
+                id="restButton"
+                class="rest-button">
+                ☕ ISTIRAHAT
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <section class="shop-info">
+
+        <div>
+            <span>SHOP LEVEL</span>
+            <strong id="shopLevel">1</strong>
+        </div>
+
+        <div>
+            <span>ITEM UNLOCKED</span>
+            <strong id="unlockedCount">3 / 30</strong>
+        </div>
+
+        <div>
+            <span>CUSTOMERS</span>
+            <strong id="customersServed">0</strong>
+        </div>
+
+        <div>
+            <span>DAY</span>
+            <strong id="day">1</strong>
+        </div>
+
+    </section>
+
+
+    <!-- WAKTU HARI -->
+
+    <section class="day-section">
+
+        <div class="day-top">
+
+            <span>
+                📅 Waktu Hari
+            </span>
+
+            <strong id="dayTimerText">
+                05:00
+            </strong>
+
+        </div>
+
+        <div class="day-timer">
+
+            <div
+                id="dayTimerBar"
+                class="day-timer-bar">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TIMER CUSTOMER -->
+
+    <section class="timer-section">
+
+        <div class="timer-top">
+
+            <span>
+                ⏱️ Customer Patience
+            </span>
+
+            <strong id="timerText">
+                60
+            </strong>
+
+        </div>
+
+        <div class="timer">
+
+            <div
+                id="timerBar"
+                class="timer-bar">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STATUS TOKO -->
+
+    <div
+        id="shopClosed"
+        class="shop-closed hidden">
+
+        ☕ TOKO SEDANG ISTIRAHAT
+        <span>
+            Customer dihentikan sementara.
+        </span>
+
+    </div>
+
+
+    <main>
+
+
+        <!-- CUSTOMER -->
+
+        <section class="panel customer-panel">
+
+            <div class="panel-title">
+                👤 CUSTOMER
+            </div>
+
+            <div class="customer">
+
+                <div
+                    id="customerAvatar"
+                    class="avatar">
+
+                    👨
+
+                </div>
+
+                <div>
+
+                    <h2 id="customerName">
+                        Customer
+                    </h2>
+
+                    <p id="customerMessage">
+                        Welcome!
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="shopping-title">
+                🛒 Shopping List
+            </div>
+
+
+            <div
+                id="customerCart"
+                class="customer-cart">
+            </div>
+
+
+            <div class="payment-info">
+
+                <div>
+
+                    <span>
+                        TOTAL PRICE
+                    </span>
+
+                    <strong id="totalPrice">
+                        Rp0
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        CUSTOMER PAYS
+                    </span>
+
+                    <strong id="customerPayment">
+                        Rp0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CHANGE -->
+
+        <section class="panel change-panel">
+
+            <div class="panel-title">
+                💵 GIVE CHANGE
+            </div>
+
+            <div class="change-target">
+
+                <span>
+                    CHANGE REQUIRED
+                </span>
+
+                <strong id="changeTarget">
+                    Rp0
+                </strong>
+
+            </div>
+
+
+            <p class="small-text">
+
+                Hitung kembalian lalu tekan
+                pecahan uang yang sesuai.
+
+            </p>
+
+
+            <div
+                id="cashButtons"
+                class="cash-buttons">
+            </div>
+
+
+            <div class="given">
+
+                <span>
+                    MONEY GIVEN
+                </span>
+
+                <strong id="moneyGiven">
+                    Rp0
+                </strong>
+
+            </div>
+
+
+            <div
+                id="selectedCash"
+                class="selected-cash">
+            </div>
+
+
+            <div class="change-actions">
+
+                <button
+                    id="resetCash"
+                    class="reset-button">
+
+                    🔄 RESET
+
+                </button>
+
+
+                <button
+                    id="completeSale"
+                    class="sale-button">
+
+                    COMPLETE SALE
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- INVENTORY -->
+
+        <section class="panel inventory-panel">
+
+            <div class="panel-title">
+                📦 STORE INVENTORY
+            </div>
+
+            <div
+                id="inventory"
+                class="inventory">
+            </div>
+
+        </section>
+
+
+        <!-- RESTOCK -->
+
+        <section class="panel restock-panel">
+
+            <div class="panel-title">
+                🚚 RESTOCK CENTER
+            </div>
+
+            <p class="small-text">
+                Pesan barang untuk mengisi stok toko.
+            </p>
+
+            <div
+                id="restockList"
+                class="restock-list">
+            </div>
+
+        </section>
+
+
+        <!-- UPGRADE -->
+
+        <section class="panel upgrade-panel">
+
+            <div class="panel-title">
+                ⬆️ SHOP UPGRADE
+            </div>
+
+            <div class="upgrade-box">
+
+                <div class="upgrade-level">
+
+                    <span>
+                        CURRENT LEVEL
+                    </span>
+
+                    <strong id="upgradeLevel">
+                        1
+                    </strong>
+
+                </div>
+
+
+                <div class="upgrade-description">
+
+                    <p id="upgradeDescription">
+                        Unlock new products.
+                    </p>
+
+                    <p>
+                        Upgrade berikutnya:
+                    </p>
+
+                    <strong id="upgradeCost">
+                        Rp0
+                    </strong>
+
+                </div>
+
+
+                <button
+                    id="upgradeButton"
+                    class="upgrade-button">
+
+                    ⬆️ UPGRADE SHOP
+
+                </button>
+
+            </div>
+
+
+            <div class="unlock-preview">
+
+                <span>
+                    NEXT UNLOCK
+                </span>
+
+                <div
+                    id="nextUnlock">
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- NOTIFICATION -->
+
+<div
+    id="notification"
+    class="notification">
+</div>
+
+
+<!-- GAME OVER -->
+
+<div
+    id="gameOver"
+    class="overlay hidden">
+
+    <div class="game-over">
+
+        <div class="game-over-icon">
+            🏪
+        </div>
+
+        <h2>
+            TOKO TUTUP
+        </h2>
+
+        <p>
+            Kamu gagal melayani customer.
+        </p>
+
+
+        <div class="final-stats">
+
+            <div>
+                <span>SCORE</span>
+                <strong id="finalScore">0</strong>
+            </div>
+
+            <div>
+                <span>MONEY</span>
+                <strong id="finalMoney">Rp0</strong>
+            </div>
+
+            <div>
+                <span>DAY</span>
+                <strong id="finalDay">1</strong>
+            </div>
+
+            <div>
+                <span>HIGH SCORE</span>
+                <strong id="finalHighScore">0</strong>
+            </div>
+
+        </div>
+
+
+        <button
+            id="restartButton"
+            class="restart-button">
+
+            🔄 OPEN SHOP AGAIN
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="game.js"></script>
+
+</body>
+
+</html>
